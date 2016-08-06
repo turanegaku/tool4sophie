@@ -1,0 +1,54 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+        title Route4Sophie
+        //- <!--Import Google Icon Font-->
+        link(href="./icon.css" rel="stylesheet")
+        //- <!--Import materialize.css-->
+        link(type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection")
+        link(type="text/css" rel="stylesheet" href="./stylesheets/style.css")
+        //- <!--Let browser know website is optimized for mobile-->
+    body
+        nav.top-nav
+            .container
+                .nav-wrapper
+                    a.page-title Route4Sophie
+        .container
+
+            .row
+                .col.m4.s12
+                    .input-field.col.s12
+                        input.autocompletes#src(type="text")
+                        label(for="src") src
+                    .input-field.col.s12
+                        input.autocompleteg#dst(type="text")
+                        label(for="dst") dst
+                    .col.s12.up
+                        h5 深さ
+                        .range-field
+                            input#depth(type="range" min="1" max="7" value="3")
+                    .col.s10.center-align
+                        a.waves-effect.waves-light.btn.valign.disabled#search 検索
+                    .col.s2
+                        .preloader-wrapper.small
+                            .spinner-layer.spinner-green-only
+                                .circle-clipper.left
+                                    .circle
+                                .gap-patch
+                                    .circle
+                                .circle-clipper.right
+                                    .circle
+                .col.m8.s12
+                    h4 結果
+                    ul.collection#result
+                        li.collection-item
+
+
+        script(src='./javascripts/jquery-3.1.0.min.js')
+        script(type="text/javascript" src="./js/materialize.min.js")
+        script(src='https://d3js.org/d3.v4.min.js')
+        script(src='./javascripts/search.js')
+

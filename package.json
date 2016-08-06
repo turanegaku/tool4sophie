@@ -1,0 +1,27 @@
+{
+  "name": "tool4sophie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.pug",
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp-pug": "^3.0.3",
+    "pug-cli": "^1.0.0-alpha6"
+  },
+  "scripts": {
+    "pug": "gulp pug",
+    "watch": "gulp watch",
+    "clean": "gulp clean",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turanegaku/tool4sophie.git"
+  },
+  "author": "turanegaku",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/turanegaku/tool4sophie/issues"
+  },
+  "homepage": "https://github.com/turanegaku/tool4sophie#readme"
+}

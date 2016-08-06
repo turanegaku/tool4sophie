@@ -1,0 +1,25 @@
+a#search, .col.up {
+    margin-top: 30px;
+}
+li span:nth-child(even) {
+    color: aqua;
+}
+body>.container {
+    width: auto;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+    color: #00B7FF;
+}
+nav.top-nav {
+    height: 122px;
+    box-shadow: none;
+}
+nav .nav-wrapper {
+    height: 100%;
+}
+nav.top-nav a.page-title {
+    line-height: 122px;
+    font-size: 48px;
+}
