@@ -21,7 +21,7 @@ $(() => {
     });
 
 
-    d3.csv('../acquaintance.csv', data => {
+    d3.csv('./acquaintance.csv', data => {
         data.forEach(v => {
             // アイテムは候補に含める
             completes[v.name] = null;
@@ -80,6 +80,8 @@ $(() => {
                         Materialize.toast(dst + 'が見つかりませんでした', 2000);
                     }
                 }
+                searching.removeClass('active');
+                search.removeClass('disabled');
                 return;
             }
 
