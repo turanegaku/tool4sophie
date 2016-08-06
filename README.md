@@ -3,6 +3,7 @@
 ## 概要
 
 - 「ソフィーのアトリエ 〜不思議な本の錬金術士〜」 の調合時における素材Aから素材Bへの調合手順を出力する[route4sophie](https://github.com/turanegaku/route4sophie)のjavascript edition
+- [here is link](https://turanegaku.github.io/tool4sophie)
 
 ## 詳細
 
