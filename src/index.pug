@@ -2,53 +2,42 @@ doctype html
 html
   head
     meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    // meta(name="viewport" content="width=device-width, initial-scale=1.0")
 
     title Route4Sophie
-    //- <!--Import Google Icon Font-->
-    link(href="./icon.css" rel="stylesheet")
-    //- <!--Import materialize.css-->
-    link(type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection")
-    link(type="text/css" rel="stylesheet" href="./stylesheets/style.css")
-    //- <!--Let browser know website is optimized for mobile-->
+    // link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    // link(rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css")
+    link(rel="stylesheet" href="./material.indigo-pink.min.css")
+    link(rel="stylesheet" href="./stylesheets/style.css")
   body
-    nav.top-nav
-      .container
-        .nav-wrapper
-          a.page-title Route4Sophie
+    // .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+    //   header.mdl-layout__header
+    //     .mdl-layout__header-row
+    //       span.mdl-layout-title Route4Sophie
+    //
     .container
-
-      .row
-        .col.m4.s12
-          .input-field.col.s12
-            input.autocompletes#src(type="text")
-            label(for="src") src
-          .input-field.col.s12
-            input.autocompleteg#dst(type="text")
-            label(for="dst") dst
-          .col.s12.up
+      .mdl-grid
+        .mdl-grid.mdl-cell.mdl-cell--6-col-desktop.mdl-cell--8-col-tablet.mdl-cell--4-col-phone
+          .mdl-textfield.mdl-js-textfield.mdl-cell.mdl-cell--12-col
+            input.mdl-textfield__input#src(type="text", name='src')
+            label.mdl-textfield__label(for="src") src
+          .mdl-textfield.mdl-js-textfield.mdl-cell.mdl-cell--12-col
+            input.mdl-textfield__input#dst(type="text", name='dst')
+            label.mdl-textfield__label(for="dst") dst
+        .mdl-grid.mdl-cell.mdl-cell--6-col-desktop.mdl-cell--8-col-tablet.mdl-cell--4-col-phone
+          .mdl-cell.mdl-cell--12-col
             h5 深さ
-            .range-field
-              input#depth(type="range" min="1" max="7" value="3")
-          .col.s10.center-align
-            a.waves-effect.waves-light.btn.valign.disabled#search 検索
-          .col.s2
-            .preloader-wrapper.small
-              .spinner-layer.spinner-green-only
-                .circle-clipper.left
-                  .circle
-                .gap-patch
-                  .circle
-                .circle-clipper.right
-                  .circle
-        .col.m8.s12
-          h4 結果
-          ul.collection#result
-            li.collection-item
+            input.mdl-slider.mdl-js-slider#depth(type="range" min="0" max="7" value="0")
+          button.mdl-cell.mdl-cell--12-col.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored#search 検索
+      h4 結果
+      svg(width=960, height=600)#result
+        defs: marker#m_ar(viewBox="0 0 10 10" refX="14" refY="5" markerUnits="strokeWidth" preserveAspectRatio="none" markerWidth="5" markerHeight="5" orient='auto')
+          polygon(points="0,0 0,10 10,5" fill="blue" id="ms")
 
 
-    script(src='./javascripts/jquery-3.1.0.min.js')
-    script(type="text/javascript" src="./js/materialize.min.js")
-    script(src='https://d3js.org/d3.v4.min.js')
-    script(src='./javascripts/search.js')
-
+    // script(defer src="https://code.getmdl.io/1.2.1/material.min.js")
+    script(defer src="./material.min.js")
+    // script(defer src='https://d3js.org/d3.v4.min.js')
+    script(defer src='./javascripts/d3.js')
+    script(defer src='./javascripts/jquery-3.1.0.min.js')
+    script(defer src='./javascripts/search.js')

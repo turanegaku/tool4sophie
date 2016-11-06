@@ -7,6 +7,7 @@ li span:nth-child(even) {
 body>.container {
     width: auto;
     padding: 50px;
+    padding-top: 100px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
@@ -22,4 +23,29 @@ nav .nav-wrapper {
 nav.top-nav a.page-title {
     line-height: 122px;
     font-size: 48px;
+}
+
+.linklabels text {
+  pointer-events: none;
+  font-size: 12px;
+  fill: #aaa;
+}
+
+.nodelabels text {
+  pointer-events: none;
+  font-size: 15px;
+  fill: #555;
+}
+
+.links path {
+  pointer-events: none;
+  stroke: grey;
+  fill: none;
+  stroke-width: 2px;
+}
+
+.nodes circle {
+  pointer-events: all;
+  stroke: grey;
+  stroke-width: 2px;
 }
