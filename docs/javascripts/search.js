@@ -30,15 +30,15 @@ $(() => {
     const d = new Array();
     let e = new Array();
 
-    d3.csv('./acquaintance.csv', data => {
+    d3.csv('./db/sophie.csv', data => {
         const classList = new Map();
 
         // クラス数の調査
         data.forEach((v, j) => {
-            id.set(v.name, j);
-            name.push(v.name);
+            id.set(v['名前'], j);
+            name.push(v['名前']);
             for (let i = 0; i < 4; i++) {
-                const cs = v['c' + i];
+                const cs = v['カテゴリ' + i];
                 if (!cs) {
                     continue;
                 }
@@ -62,7 +62,7 @@ $(() => {
         // 初期エッジ
         data.forEach((v, j) => {
             for (let i = 0; i < 4; i++) {
-                const ms = v['m' + i];
+                const ms = v['材料' + i];
                 if (!ms) {
                     continue;
                 }
@@ -91,8 +91,8 @@ $(() => {
         resultShow();
     });
 
-    isrc.val('ハチミツ');
-    idst.val('先見の水晶玉');
+    // isrc.val('ハチミツ');
+    // idst.val('先見の水晶玉');
 
     depth.on('change', () => resultShow(depth.val()));
 
@@ -107,7 +107,7 @@ $(() => {
         // console.log(src, dst);
         // console.log(iis, iid);
         // console.log(name[iis], name[iid]);
-        if (!iis || !iid) {
+        if (typeof iis === 'undefined' || typeof iis === 'undefined') {
             console.log('plz set src and dst');
             console.log('src', iis);
             console.log('dst', iid);
@@ -117,7 +117,7 @@ $(() => {
         if (limit == 0) {
             return;
         }
-        console.log('limit', limit);
+        // console.log('limit', limit);
         depth[0].MaterialSlider.change(limit);
 
         const nodes = new Array();
@@ -139,7 +139,7 @@ $(() => {
             if (typeof u.rate === 'undefined') {
                 u.rate = d[iis][u.id] / limit;
             }
-            console.log(u);
+            // console.log(u);
         });
         nodes.forEach(u => {
             const edge = new Map();
@@ -152,7 +152,7 @@ $(() => {
                 }
             });
             edge.forEach((l, v) => {
-                console.log({source: u.id, target: v, as: l.join(' '), rev: d[v][u.id] === 1});
+                // console.log({source: u.id, target: v, as: l.join(' '), rev: d[v][u.id] === 1});
                 links.push({source: u.id, target: v, as: l.join(' '), rev: d[v][u.id] === 1});
             });
             // links.push({source: u.id, target: v.id, as: v.as});
@@ -200,7 +200,7 @@ $(() => {
 
         linklabels.append('textPath')
         .attr('xlink:href', (d, i) => '#linkpath' + i)
-        .text(d => console.log(d.as) || d.as);
+        .text(d => d.as);
 
         simulation.stop();
         simulation.alpha(1);
@@ -221,7 +221,8 @@ $(() => {
                 return 'M' + d.source.x + ',' + d.source.y + 'L' + d.target.x + ',' + d.target.y;
             }
             const dr = Math.sqrt(dx * dx + dy * dy);
-            return 'M' + d.source.x + ',' + d.source.y + 'A' + dr + ',' + dr + ' 0 0,1 ' + d.target.x + ',' + d.target.y;
+            return 'M' + d.source.x + ',' + d.source.y
+            + 'A' + dr + ',' + dr + ' 0 0,1 ' + d.target.x + ',' + d.target.y;
         }
 
 
