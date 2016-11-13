@@ -49,3 +49,15 @@ nav.top-nav a.page-title {
   stroke: grey;
   stroke-width: 2px;
 }
+.nodes circle.validing {
+  stroke: red;
+  stroke-width: 4px;
+}
+
+.invalid {
+  transition: opacity .5s;
+  opacity: .1;
+}
+:not(.invalid) {
+  transition: opacity .5s;
+}

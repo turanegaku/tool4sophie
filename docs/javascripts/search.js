@@ -14,8 +14,8 @@ const simulation = d3.forceSimulation()
 .force('link', d3.forceLink().id(d => d.id).distance(200).strength(1))
 .force('charge', d3.forceManyBody())
 .force('center', d3.forceCenter(width / 2, height / 2))
-.force('x', d3.forceX(d => width * d.rate).strength(0.02))
-;
+.force('x', d3.forceX(d => width * d.rate).strength(0.02));
+
 
 $(() => {
     d3.select('svg').selectAll('g').exit().remove();
@@ -137,13 +137,18 @@ $(() => {
                     rate: d[iis][i] / limit,
                     r: 10 - 8 * Math.min(d[iis][i], d[i][iid]) / limit
                 });
+                // console.log({
+                //     id: i,
+                //     name: name[i],
+                //     a: d[iis][i],
+                //     b: d[i][iid],
+                // });
             }
         }
         nodes.forEach(u => {
             if (typeof u.rate === 'undefined') {
                 u.rate = d[iis][u.id] / limit;
             }
-            // console.log(u);
         });
         nodes.forEach(u => {
             const edge = new Map();
@@ -162,12 +167,30 @@ $(() => {
             // links.push({source: u.id, target: v.id, as: v.as});
         });
 
+        const linklabels = svg.append('g')
+        .attr('class', 'linklabels')
+        .selectAll('text')
+        .data(links)
+        .enter()
+        .append('text')
+        .attr('id', (d, i) => 'linklabel' + i)
+        .attr('dx', 80)
+        .attr('dy', 0);
+
+        const link = svg.append('g')
+        .attr('class', 'links')
+        .attr('marker-end', 'url(#m_ar)')
+        .selectAll('path')
+        .data(links)
+        .enter().append('path')
+        .attr('id', (d, i) => 'linkpath' + i);
 
         const nodelabel = svg.append('g')
         .attr('class', 'nodelabels')
         .selectAll('text')
         .data(nodes)
         .enter().append('text')
+        .attr('id', (d, i) => 'nodelabel' + i)
         .text(d => d.name);
 
         const node = svg.append('g')
@@ -184,23 +207,48 @@ $(() => {
             .on('end', dragended)
         );
 
-        const link = svg.append('g')
-        .attr('class', 'links')
-        .attr('marker-end', 'url(#m_ar)')
-        .selectAll('path')
-        .data(links)
-        .enter().append('path')
-        .attr('id', (d, i) => 'linkpath' + i);
+        // マウスオーバーしたのから遠いノードを隠す
+        let validing = false;
+        node
+        .filter(e => e.id !== iis && e.id !== iid)
+        .each(e => e.validing = false)
+        .on('click', (e, i, r) => {
+            if (validing && !e.validing) {
+                return;
+            }
+            e.validing = !e.validing;
+            validing = e.validing;
+            d3.select(r[i]).classed('validing', e.validing);
+        })
+        .on('mouseover', e => {
+            if (validing && !e.validing) {
+                return;
+            }
+            const valid = [iis, e.id, iid];
+            // node.filter(n => valid.indexOf(n.id) === -1).each(n => console.log(n.name, d[n.id][e.id], d[e.id][n.id]));
 
-        const linklabels = svg.append('g')
-        .attr('class', 'linklabels')
-        .selectAll('text')
-        .data(links)
-        .enter()
-        .append('text')
-        .attr('id', (d, i) => 'linklabel' + i)
-        .attr('dx', 80)
-        .attr('dy', 0);
+            const list = new Array();
+            const invalid = node.filter(n => {
+                return valid.indexOf(n.id) === -1
+                && Math.min(d[iis][n.id] + d[n.id][e.id] + d[e.id][iid],
+                            d[iis][e.id] + d[e.id][n.id] + d[n.id][iid]) > limit;
+            });
+            invalid.each(n => list.push(n.id));
+            invalid
+            .classed('invalid', true);
+            link.filter(n => list.indexOf(n.source.id) !== -1 || list.indexOf(n.target.id) !== -1)
+            .classed('invalid', true)
+            .each(n => linklabels.filter('#linklabel' + n.index).classed('invalid', true));
+            invalid.each(n => nodelabel.filter('#nodelabel' + n.index).classed('invalid', true));
+        })
+        .on('mouseout', e => {
+            if (!validing && !e.validing) {
+                node.classed('invalid', false);
+                link.classed('invalid', false);
+                nodelabel.classed('invalid', false);
+                linklabels.classed('invalid', false);
+            }
+        });
 
         linklabels.append('textPath')
         .attr('xlink:href', (d, i) => '#linkpath' + i)
