@@ -3,8 +3,12 @@
 const INF = 1000;
 
 const svg = d3.select('body svg');
-const width = 960;
-const height = 600;
+const width = $('.container').width();
+const height = width * 0.8;
+svg
+.attr('width', width)
+.attr('height', height);
+
 const simulation = d3.forceSimulation()
 .velocityDecay(0.3)
 .force('link', d3.forceLink().id(d => d.id).distance(200).strength(1))
@@ -61,7 +65,7 @@ $(() => {
 
         // 初期エッジ
         data.forEach((v, j) => {
-            for (let i = 0; i < 4; i++) {
+            for (let i = 1; i < 5; i++) {
                 const ms = v['材料' + i];
                 if (!ms) {
                     continue;
@@ -107,7 +111,7 @@ $(() => {
         // console.log(src, dst);
         // console.log(iis, iid);
         // console.log(name[iis], name[iid]);
-        if (typeof iis === 'undefined' || typeof iis === 'undefined') {
+        if (typeof iis === 'undefined' || typeof iid === 'undefined') {
             console.log('plz set src and dst');
             console.log('src', iis);
             console.log('dst', iid);
@@ -125,7 +129,7 @@ $(() => {
         nodes.push({id: iis, name: src, end: true, rate: 0, r: 10});
         nodes.push({id: iid, name: dst, end: true, rate: 1, r: 10});
         for (let i = 0; i < n; i++) {
-            if (d[iis][i] + d[i][iid] <= limit) {
+            if (i !== iis && i !== iid && d[iis][i] + d[i][iid] <= limit) {
                 nodes.push({
                     id: i,
                     name: name[i],
