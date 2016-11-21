@@ -1,26 +1,22 @@
 # tool4sophie
+- 「ソフィーのアトリエ 〜不思議な本の錬金術士〜」 の調合時における素材Aから素材Bへの調合経路を表示する
+- [github.io](https://turanegaku.github.io/tool4sofhie/)
+![](https://raw.githubusercontent.com/wiki/turanegaku/tool4sophie/resource/main.png)
 
-## 概要
 
-- 「ソフィーのアトリエ 〜不思議な本の錬金術士〜」 の調合時における素材Aから素材Bへの調合手順を出力する[route4sophie](https://github.com/turanegaku/route4sophie)のjavascript edition
-- [here is link](https://turanegaku.github.io/tool4sophie)
+## 使い方
+1. srcにスタートの素材を入力する
+2. dstにゴールの素材を入力する
+3. 検索
+4. 結果が表示される
+5. 表示された経路が不十分なときは深さを増やす
+6. 使用したい中途素材をクリックしてフィルタする
 
-## 詳細
-
-- 調合物にある特性をつけたいとき，ある特性がついた素材を持ってはいるが，その調合手順を考えるのが面倒という人のためのツール
-- 取りうる全ての経路を検出する
-
-## 使用例
-
-### キルヘン・ベル特産 ハチミツを作りたい
-
-- キルヘン・ベル特産 ハチの巣なんてそんな都合の良いもの持っていない．
-- マルグリットさんがキルヘン・ベル特産 キルヘンミルクを売っている．
-- ミルクからハチミツに特性遺伝できるか?
-
-- キルヘンミルク → 中和剤 → ハチミツ という経路で調合できることがわかった．
-
+## デモ
 ### ゆらめく光 スプルースを作りたい
-
 - ゆらめく光といえば夜光水
 - 夜光水からスプルースに特性遺伝できるか?
+![](https://raw.githubusercontent.com/wiki/turanegaku/tool4sophie/resource/spruce.gif)
+
+## LICENCE
+[MIT](./LICENSE)
